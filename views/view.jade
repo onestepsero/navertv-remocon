@@ -1,0 +1,71 @@
+doctype
+html
+	head
+		title
+		link(href='public/css/bootstrap.css', rel='stylesheet ', type='text/css')
+		link(href='public/css/darkstrap.css', rel='stylesheet ', type='text/css')
+		
+		script(src='http://serviceapi.rmcnmv.naver.com/resources/js/rmcplayer.js?1361517190599')		
+		script(src='public/js/jquery-1.9.1.js')
+		
+		
+		script
+			
+			function ajaxCall() {
+				$(document).ready(function() {
+					$.ajax({
+					url : "public/api.json",
+					method : "GET",
+					cashe : false,
+					error : function(xhr, stat) {
+							//console.log("ERROR ");
+					},
+					success:function(res){
+						checkChannel(res.index);						
+					}	
+					});
+				});
+			}
+
+			function checkChannel(index) {							
+				
+			
+				if(  #{tvInfo.id} != index ) {				
+					window.location.reload();
+				}
+			}
+			
+
+			function onFlashPlayerEvent(event) {
+				flashPlayerStatus = event;
+				
+				if ('complete' == flashPlayerStatus && isRelateClipCalled == false) {
+					isRelateClipCalled = true;				
+				}
+			}
+
+			setInterval(ajaxCall, 2000);
+			
+	body
+
+		div.container#content
+			ul.breadcrumb
+				li  
+				a  Home 
+				span.divider				
+
+		div(style='height:100%')
+		
+			div.page-header
+				h1 #{tvInfo.id} :  #{tvInfo.title}
+			
+
+			
+			div.hero-unit
+				script			
+					#{script};
+		
+		
+
+		
+

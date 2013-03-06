@@ -1,0 +1,23 @@
+doctype
+html
+	head
+		title
+		link(href='/public/css/bootstrap.css', rel='stylesheet ', type='text/css')
+		link(href='/public/css/darkstrap.css', rel='stylesheet ', type='text/css')		
+		script(src='/public/js/jquery-1.9.1.js')
+		script(src='/public/js/bootstrap-carousel.js')
+		
+
+	body
+		div.container#content
+		div.hero-unit			
+			h1 NaverTvCast List (#{id})
+
+		div.row
+			div.span12
+				div.bs-docs-example
+					ul.nav.nav-tabs.nav-stacked
+						each item in contents
+							li
+								a(href='/detail/#{item.id}') #{item.title} 
+

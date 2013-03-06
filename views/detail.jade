@@ -1,0 +1,26 @@
+doctype
+html
+	head
+		title
+		link(href='/public/css/bootstrap.css', rel='stylesheet ', type='text/css')
+		link(href='/public/css/darkstrap.css', rel='stylesheet ', type='text/css')
+		script(src='/socket.io/socket.io.js')
+		script(src='http://serviceapi.rmcnmv.naver.com/resources/js/rmcplayer.js?1361517190599')
+		script
+			function onFlashPlayerEvent(event) {
+				flashPlayerStatus = event;
+				
+				if ('complete' == flashPlayerStatus && isRelateClipCalled == false) {
+					isRelateClipCalled = true;				
+				}
+			}
+	body
+		div(style='height:100%')
+		div.container#content
+
+			div.page-header
+				
+			
+			div.hero-unit
+				script			
+					#{script};
