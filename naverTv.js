@@ -8,7 +8,7 @@ var tvInfo  ;
 var naverTvIndex  ;
 
 app.configure(function(){
-	app.set('port',  9002);
+	app.set('port',  16100);
 	app.set('view', __dirname + '/views');
 	app.set('view engine', 'jade');
 	app.use('/public',express.static(path.join(__dirname, '/public')));
