@@ -29,6 +29,7 @@ exports.naverTvUrlParse = function(){
 
 urlParseToDb = function(channel){
 	
+	
 	var keyIndex = CHANNEL_LIST.indexOf(channel);
 	request(
 	{ 
@@ -48,15 +49,25 @@ urlParseToDb = function(channel){
 				title:title,
 				href: href
 			}
-
+			
 			tvInfoscript(index);
-
+			
 			index++;
 
 		});
+		makeImageThumb(body);
 	});
 
-
+	
+	var makeImageThumb = function(body) {
+		var $ = cheerio.load(body);
+		var index = 0;
+		$(".lst_obj  .conts  .thumb > img").each(function(){
+			var link = $(this);
+			contents[keyIndex][index].img =  link.attr('src');
+			index++;
+		});
+	};
 
 	var tvInfoscript = function(index) {
 	
@@ -73,7 +84,7 @@ urlParseToDb = function(channel){
 		$("#player").each(function(){
 			var link = $(this).children().text();				
 			var replaceContent = S(link).replaceAll('"', "'");
-
+			
 			contents[keyIndex][index].script  = replaceContent;
 
 		});

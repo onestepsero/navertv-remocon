@@ -21,8 +21,8 @@ app.configure(function(){
 })
 
 //main
-app.get('/', function(req, res){
-	res.render("index", {channelList: CHANNEL_LIST})
+app.get('/', function(req, res){	
+	res.render("index", {channelList: CHANNEL_LIST, ip : req.ip })
 	db.naverTvUrlParse();	
 });
 
@@ -41,5 +41,5 @@ app.get('/detail/:id',  function(req, res){
 });
 
 server.listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+	console.log("Express server listening on port " + app.get('port'));
 });

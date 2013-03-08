@@ -14,10 +14,20 @@ html
 			h1 NaverTvCast List (#{id})
 
 		div.row
-			div.span12
-				div.bs-docs-example
-					ul.nav.nav-tabs.nav-stacked
+			div.span5				
+
+				table.table
+					thead
+						tr
+							th 
+							th 
+							th 
+					tbody
 						each item in contents
-							li
-								a(href='/detail/#{item.id}') #{item.title} 
+							tr
+								td
+									img(src='#{item.img}')
+								td
+									a(href='/detail/#{item.id}') #{item.title} 							
+								
 
