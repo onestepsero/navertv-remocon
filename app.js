@@ -22,7 +22,8 @@ app.configure(function(){
 
 //main
 app.get('/', function(req, res){	
-	res.render("index", {channelList: CHANNEL_LIST, ip : req.ip })
+	
+	res.render("index", {channelList: CHANNEL_LIST, host : req.host })
 	db.naverTvUrlParse();	
 });
 
