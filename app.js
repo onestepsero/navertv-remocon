@@ -17,6 +17,7 @@ app.configure(function(){
 	app.set('port', process.env.PORT || 8080);
 	app.set('view', __dirname + '/views');
 	app.set('view engine', 'jade');
+	app.use(express.urlencoded());
 	app.use('/public',express.static(path.join(__dirname, '/public')));
 })
 
@@ -30,8 +31,23 @@ app.get('/', function(req, res){
 //list
 app.get('/tvlist/:id', function(req, res){
 	contents = db.getData(req.params.id)	;	
-	res.render("list", {id: req.params.id, contents:contents});	
+	if(contents) {
+		res.format({
+			html: function() { res.render("list", {id: req.params.id, contents:contents});},
+			json: function() {  res.json(JSON.stringify(contents));}
+		});
+		
+	} else {
+		res.send('Not found');
+	}
 });
+
+app.get('/test/:id', function(req, res){
+
+	contents = db.getData(req.params.id)	;	
+	res.json(JSON.stringify(contents));
+});
+
 
 //detail
 app.get('/detail/:id',  function(req, res){

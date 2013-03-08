@@ -6,9 +6,35 @@ html
 		script(src='/public/js/jquery-1.9.1.js')
 		script(src='/public/js/bootstrap-carousel.js')
 	body
+		script
+			function ajaxCall(url) {
+				$(document).ready(function() {
+					$.ajax({
+					url : '/tvlist/'+url,
+					method : "GET",
+					cashe : false,
+					headers : {Accept: 'application/json'},
+					error : function(xhr, stat) {
+							//console.log("ERROR ");
+					},
+					success:function(res){
+						$('.bs-docs-example').attr('style', 'display:none');
+						
+						var json = eval("(" + res + ")");
+						$.each(json, function(i, info){
+							$('#tvList').append('<tr> <td> <img src=' + info.img +  '> </td> <td> <a href=/detail/' + info.id + '>'+ info.title + ' </a> <td></tr>');						
+						});
+						
+					}	
+					});
+				});
+			}
+			
+
 		div.container#content
 		div.hero-unit			
-			h1 NaverTvCast  
+			h1 
+				a(href='http://#{host}:8080') NaverTvCast   
 			a(href='http://#{host}:9002/', target='_blank') TV OUT
 
 		div.row			
@@ -17,4 +43,14 @@ html
 					ul.nav.nav-tabs.nav-stacked
 						each item in channelList
 							li
-								a(href='/tvlist/#{item}') #{item} 
+								a(href='#' ,onClick="ajaxCall('#{item}');") #{item} 
+
+			div.span5
+				table.table
+					thead
+						tr
+							th 
+							th 
+							th 
+					tbody#tvList
+							
